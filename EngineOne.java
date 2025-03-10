@@ -14,27 +14,26 @@ public class EngineOne {
     specialCharacters
     public static void main(String[] args) {
         String[] params = {"numbs", "specialCharacters"}; // tipos de caracteres que serao combinados
-        String elements = mergeElements(params); // chama a funcao
-        System.out.println(elements);
-        List<String> combinations = wordlistSystem(3, elements);
+        List<String> combinations = wordlistSystem(3, params);
         System.out.println(combinations);
     }
     */
-
+    
     public static List<String> wordlistSystem(int maxSizeString, String[] options) {
-        String elementsMerge = mergeElements(options);
-        String[] elements = elementsMerge.split(""); // Recebe String e transforma em array
+        EngineCommons functions = new EngineCommons(); // Chamando EngineCommons
+        String stringMerged = stringMerge(options);
+        String[] convertStringArray = stringMerged.split(""); // Recebe String e transforma em array
         List<String> combinations = new ArrayList<>(); // Armazena todas as combinações
 
         //int maxCombinations = (int) Math.pow(words.length, maxSizeString); // Precisa importar lib
-        int maxCombinations = exponentiation(elements.length, maxSizeString);
+        int maxCombinations = functions.exponentiation(convertStringArray.length, maxSizeString);
 
         while (combinations.size() < maxCombinations) {
             StringBuilder stringCombination = new StringBuilder();
 
             for (int i = 0; i < maxSizeString; i++) {
-                int randIntNumber = ThreadLocalRandom.current().nextInt(0, elements.length);
-                stringCombination.append(elements[randIntNumber]);
+                int randIntNumber = ThreadLocalRandom.current().nextInt(0, convertStringArray.length);
+                stringCombination.append(convertStringArray[randIntNumber]);
             }
 
             String combination = stringCombination.toString();
@@ -48,7 +47,7 @@ public class EngineOne {
         return combinations;
     }
 
-    public static String mergeElements(String[] options) {
+    public static String stringMerge(String[] options) {
         String words = "abcdefghijklmnopqrstuvwxyz";
         String numbs = "0123456789";
         String specialCharacters = "@!#$%&*.,><";
@@ -62,12 +61,5 @@ public class EngineOne {
         }
         return String.join("", elements);
         // e necessario dar .split()
-    }
-
-    public static int exponentiation(int base, int exponent) {
-        if (exponent == 0) {
-            return 1;
-        }
-        return base * exponentiation(base, exponent - 1);
     }
 }
