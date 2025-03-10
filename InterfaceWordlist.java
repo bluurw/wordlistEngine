@@ -19,9 +19,11 @@ public class InterfaceWordlist {
         window.setLayout(new BorderLayout());
         window.setVisible(true);
 
+
         // PAINEL DOS GERADORES
         JPanel generatorPanel = new JPanel();
         generatorPanel.setLayout(new GridLayout(3, 1)); // 3 linhas 1 coluna
+
 
         // GERADOR DO SISTEMA
         JPanel frameSystemGenerator = new JPanel();
@@ -40,7 +42,7 @@ public class InterfaceWordlist {
 
         JPanel subframeInputSizeLimitString = new JPanel();
         JLabel labelInputSizeLimitString = new JLabel("Digite o tamanho maximo da String: ");
-        // colocar alerta para caso o numero seja maior que o permitido
+        // colocar alerta para caso o numero seja maior que o permitido [REALIZADO]
         JTextField textInputSizeLimitString = new JTextField(2); // tamanho da string
         subframeInputSizeLimitString.add(labelInputSizeLimitString);
         subframeInputSizeLimitString.add(textInputSizeLimitString);
@@ -54,14 +56,28 @@ public class InterfaceWordlist {
         frameSystemGenerator.add(subframeButtonGenerateSystem);
         window.add(frameSystemGenerator);
 
+        /*
         //SUBFRAME GERADOR PERSONALIZADO
         JPanel framePersonalizedGenerator = new JPanel();
         framePersonalizedGenerator.setLayout(new BorderLayout());
+        //framePersonalizedGenerator.setLayout(new GridLayout(3, 1));
         framePersonalizedGenerator.setBorder(BorderFactory.createTitledBorder("Personalized Generator"));
 
+        JPanel panelPersonalizedGenerator = new JPanel();
         JLabel labelPersonalizedGenerator = new JLabel("Espaco reservado para geracao personalizada");
+        JTextField textInputCharactersCombination = new JTextField(99); // Gambiarra! Mudar para alguma forma que nao de buffer OverFlow
         framePersonalizedGenerator.add(labelPersonalizedGenerator, BorderLayout.CENTER);
+        panelPersonalizedGenerator.add(panelPersonalizedGenerator);
+        panelPersonalizedGenerator.add(labelPersonalizedGenerator);
         
+        JPanel subframeButtonGeneratePersonalized = new JPanel();
+        JButton buttonGeneratePersonalized = new JButton();
+        subframeButtonGeneratePersonalized.add(buttonGeneratePersonalized);
+
+        framePersonalizedGenerator.add(subframeButtonGeneratePersonalized);
+        */
+        
+        /*
         //SUBFRAME GERADOR SMARTED 
         JPanel frameSmartedGenerator = new JPanel();
         frameSmartedGenerator.setLayout(new BorderLayout());
@@ -69,14 +85,16 @@ public class InterfaceWordlist {
 
         JLabel labelSmartedGenerator = new JLabel("Espaco reservado para geracao API");
         frameSmartedGenerator.add(labelSmartedGenerator, BorderLayout.CENTER);
+        */
 
         //ADICIONA AO PRINCIPAL
         generatorPanel.add(frameSystemGenerator);
-        generatorPanel.add(framePersonalizedGenerator);
-        generatorPanel.add(frameSmartedGenerator);
+        //generatorPanel.add(framePersonalizedGenerator);
+        //generatorPanel.add(frameSmartedGenerator);
 
         //ADICIONA O PAINEL AO TOPO DA JANELA
         window.add(generatorPanel, BorderLayout.NORTH);
+
 
         // EXIBIR A WORDLIST GERADA
         JTextArea wordlistArea = new JTextArea();
