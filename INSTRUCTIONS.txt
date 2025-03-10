@@ -1,0 +1,18 @@
+# Apague todas classses
+rm -rf *.class
+
+# Compila um unico arquivos
+javac EngineOne.java
+
+# Compila todos arquivos
+javac wordlistEngine/*.java
+
+# Roda um unico arquivos
+java wordlistEngine.EngineOne
+
+
+# Se a class nao for encontrada dentro do modelo
+# 1- Limpe todas classes geradas anteriormente [rm -rf *.class]
+# 2- Caso esteja no mesmo diretorio dos executaveis saia [cd ..]
+# 3- Compile todos arquivos junto [javac wordlistEngine/*.java]
+# 4- Execute somente o problematico [java wordlistEngine.EngineOne]
