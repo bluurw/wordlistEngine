@@ -31,14 +31,14 @@ public class InterfaceWordlist {
         frameSystemGenerator.setBorder(BorderFactory.createTitledBorder("System Generator"));
 
         JPanel subframeCheckBoxGenerateSystem = new JPanel();
-        JCheckBox checkBox1 = new JCheckBox("a-z");
-        JCheckBox checkBox2 = new JCheckBox("A-Z");
-        JCheckBox checkBox3 = new JCheckBox("0-9");
-        JCheckBox checkBox4 = new JCheckBox("!@#$%&*?");
-        subframeCheckBoxGenerateSystem.add(checkBox1);
-        subframeCheckBoxGenerateSystem.add(checkBox2);
-        subframeCheckBoxGenerateSystem.add(checkBox3);
-        subframeCheckBoxGenerateSystem.add(checkBox4);
+        JCheckBox checkBoxSystem1 = new JCheckBox("a-z");
+        JCheckBox checkBoxSystem2 = new JCheckBox("A-Z");
+        JCheckBox checkBoxSystem3 = new JCheckBox("0-9");
+        JCheckBox checkBoxSystem4 = new JCheckBox("!@#$%&*?");
+        subframeCheckBoxGenerateSystem.add(checkBoxSystem1);
+        subframeCheckBoxGenerateSystem.add(checkBoxSystem2);
+        subframeCheckBoxGenerateSystem.add(checkBoxSystem3);
+        subframeCheckBoxGenerateSystem.add(checkBoxSystem4);
 
         JPanel subframeInputSizeLimitString = new JPanel();
         JLabel labelInputSizeLimitString = new JLabel("Digite o tamanho maximo da String: ");
@@ -117,9 +117,9 @@ public class InterfaceWordlist {
 
         //ADICIONA O PAINEL AO TOPO DA JANELA
         window.add(generatorPanel, BorderLayout.NORTH);
-
-
+        
         // EXIBIR A WORDLIST GERADA
+        // Fixar um tamanho para a area de texto
         JTextArea wordlistArea = new JTextArea();
         wordlistArea.setEditable(false);
 
@@ -137,15 +137,15 @@ public class InterfaceWordlist {
         // specialCharacters
         buttonGenerateSystem.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformedSystem(ActionEvent e) {
                 try {
                     wordlistArea.setText(""); // Limpa a area
 
                     List<String> selectedOptions = new ArrayList<>();
-                    if (checkBox1.isSelected()) selectedOptions.add("wordsLowerCase");
-                    if (checkBox2.isSelected()) selectedOptions.add("wordsUperCase");
-                    if (checkBox3.isSelected()) selectedOptions.add("numbers");
-                    if (checkBox4.isSelected()) selectedOptions.add("specialCharacters");
+                    if (checkBoxSystem1.isSelected()) selectedOptions.add("wordsLowerCase");
+                    if (checkBoxSystem2.isSelected()) selectedOptions.add("wordsUperCase");
+                    if (checkBoxSystem3.isSelected()) selectedOptions.add("numbers");
+                    if (checkBoxSystem4.isSelected()) selectedOptions.add("specialCharacters");
 
                     String[] optionsArrayConvert = selectedOptions.toArray(new String[0]);
 
@@ -189,5 +189,33 @@ public class InterfaceWordlist {
                 }
             }
         });
+
+        buttonGeneratePersonalized.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformedPersonalized(ActionEvent e) {
+                try {
+                    wordlistArea.setText(""); // Limpa a area
+
+                    String labelInputKeysWordsArrayConvert = labelInputKeysWords.getText();
+                    //labelInputKeysWordsArrayConvert = labelInputKeysWordsArrayConvert.split(" "); // Remover caso de certo
+                    int maxSizeStringPersonalized = Integer.parseInt(labelInputSizeKeysWords.getText());
+                    if (maxSizeStringPersonalized <= 0) {
+                        JOptionPane.showMessageDialog(window, "O numero deve ser maior que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    EngineTwo functions = new EngineTwo();
+                    List<String> wordlist = functions.wordlistPersonalized(maxSizeStringPersonalized, labelInputKeysWordsArrayConvert);
+        
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(window, "Numero Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(window, "Error ao gerar Wordlist: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                } 
+            }
+        });
+
+
+
     }
 }
