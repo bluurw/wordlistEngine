@@ -13,7 +13,7 @@ public class InterfaceWordlist {
         
         // FRAME PRINCIPAL
         JFrame window = new JFrame("Gerador de Wordlists");
-        window.setSize(450, 600);
+        window.setSize(450, 400); //largura e altura
         window.setMinimumSize(new Dimension(450, 600));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(new BorderLayout());
@@ -56,41 +56,64 @@ public class InterfaceWordlist {
         frameSystemGenerator.add(subframeButtonGenerateSystem);
         window.add(frameSystemGenerator);
 
-        /*
+        
         //SUBFRAME GERADOR PERSONALIZADO
         JPanel framePersonalizedGenerator = new JPanel();
-        framePersonalizedGenerator.setLayout(new BorderLayout());
-        //framePersonalizedGenerator.setLayout(new GridLayout(3, 1));
+        //framePersonalizedGenerator.setLayout(new BorderLayout());
+        framePersonalizedGenerator.setLayout(new GridLayout(4, 1));
         framePersonalizedGenerator.setBorder(BorderFactory.createTitledBorder("Personalized Generator"));
 
-        JPanel panelPersonalizedGenerator = new JPanel();
-        JLabel labelPersonalizedGenerator = new JLabel("Espaco reservado para geracao personalizada");
-        JTextField textInputCharactersCombination = new JTextField(99); // Gambiarra! Mudar para alguma forma que nao de buffer OverFlow
-        framePersonalizedGenerator.add(labelPersonalizedGenerator, BorderLayout.CENTER);
-        panelPersonalizedGenerator.add(panelPersonalizedGenerator);
-        panelPersonalizedGenerator.add(labelPersonalizedGenerator);
-        
-        JPanel subframeButtonGeneratePersonalized = new JPanel();
-        JButton buttonGeneratePersonalized = new JButton();
-        subframeButtonGeneratePersonalized.add(buttonGeneratePersonalized);
+        JPanel subframeInputKeysWords = new JPanel(); // Frame para inserir as palavras chave da wordlist
+        JLabel labelInputKeysWords = new JLabel("Digite as palavras chave (Devem ser separadas por espaco): ");
+        JTextField textFieldInputKeysWords = new JTextField(2); // Gambiarra!!! sujeito a buffer Overflow
+        subframeInputKeysWords.add(labelInputKeysWords);
+        subframeInputKeysWords.add(textFieldInputKeysWords);
 
-        framePersonalizedGenerator.add(subframeButtonGeneratePersonalized);
-        */
+        JPanel subframeInputSizeKeysWords = new JPanel(); // Frame para inserir as palavras chave da wordlist
+        JLabel labelInputSizeKeysWords = new JLabel("Digite o tamanho de cada String (key=1): ");
+        JTextField textFieldInputSizeKeysWords = new JTextField(2); // Gambiarra!!! sujeito a buffer Overflow
+        subframeInputSizeKeysWords.add(labelInputSizeKeysWords);
+        subframeInputSizeKeysWords.add(textFieldInputSizeKeysWords);
+
+        JPanel subframeButtonGeneratePersonalized = new JPanel();
+        JButton buttonGeneratePersonalized = new JButton("Generate Wordlist");
+        subframeButtonGeneratePersonalized.add(buttonGeneratePersonalized);
         
-        /*
+        framePersonalizedGenerator.add(subframeInputKeysWords);
+        framePersonalizedGenerator.add(subframeInputSizeKeysWords);
+        framePersonalizedGenerator.add(subframeButtonGeneratePersonalized);
+        window.add(framePersonalizedGenerator);
+        
+
         //SUBFRAME GERADOR SMARTED 
         JPanel frameSmartedGenerator = new JPanel();
         frameSmartedGenerator.setLayout(new BorderLayout());
-        frameSmartedGenerator.setBorder(BorderFactory.createTitledBorder("Personalized Generator"));
+        frameSmartedGenerator.setBorder(BorderFactory.createTitledBorder("Smarted Generator"));
+        frameSmartedGenerator.setLayout(new GridLayout(2, 1));
 
-        JLabel labelSmartedGenerator = new JLabel("Espaco reservado para geracao API");
-        frameSmartedGenerator.add(labelSmartedGenerator, BorderLayout.CENTER);
-        */
+        JPanel subframeCheckBoxGenerateSmarted = new JPanel();
+        JCheckBox checkBoxSmarted1 = new JCheckBox("GitHub DataBase");
+        JCheckBox checkBoxSmarted2 = new JCheckBox("IHaveBeenPwaned");
+        JCheckBox checkBoxSmarted3 = new JCheckBox("Listas Online");
+        JCheckBox checkBoxSmarted4 = new JCheckBox("Outros");
+        subframeCheckBoxGenerateSmarted.add(checkBoxSmarted1);
+        subframeCheckBoxGenerateSmarted.add(checkBoxSmarted2);
+        subframeCheckBoxGenerateSmarted.add(checkBoxSmarted3);
+        subframeCheckBoxGenerateSmarted.add(checkBoxSmarted4);
+
+        JPanel subframeButtonGenerateSmarted = new JPanel();
+        JButton buttonGenerateSmarted = new JButton("Generate Wordlist");
+        subframeButtonGenerateSmarted.add(buttonGenerateSmarted);
+
+        frameSmartedGenerator.add(subframeCheckBoxGenerateSmarted);
+        frameSmartedGenerator.add(subframeButtonGenerateSmarted);
+        window.add(frameSmartedGenerator);
+
 
         //ADICIONA AO PRINCIPAL
         generatorPanel.add(frameSystemGenerator);
-        //generatorPanel.add(framePersonalizedGenerator);
-        //generatorPanel.add(frameSmartedGenerator);
+        generatorPanel.add(framePersonalizedGenerator);
+        generatorPanel.add(frameSmartedGenerator);
 
         //ADICIONA O PAINEL AO TOPO DA JANELA
         window.add(generatorPanel, BorderLayout.NORTH);
@@ -99,11 +122,15 @@ public class InterfaceWordlist {
         // EXIBIR A WORDLIST GERADA
         JTextArea wordlistArea = new JTextArea();
         wordlistArea.setEditable(false);
+
+        Dimension fixedSize = new Dimension(450, 400);
+        wordlistArea.setMinimumSize(fixedSize);
+
         JScrollPane wordlistScrollPane = new JScrollPane(wordlistArea);
         wordlistScrollPane.setBorder(BorderFactory.createTitledBorder("Wordlist Gerada"));
         window.add(wordlistScrollPane, BorderLayout.CENTER);
 
-        // options
+        // OPTIONS
         // wordsLowerCase
         // wordsUperCase
         // numbers
