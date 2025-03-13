@@ -12,7 +12,7 @@ public class EngineTwo {
         // No campo de texto sera recebido uma String, que tambem la sera feito o .split(" ")
         EngineCommons functions = new EngineCommons(); // Chama a EngineCommons
 
-        String[] elements = keyWords.split(""); // Recebe String e transforma em array
+        String[] elements = keyWords.split(" "); // Recebe String e transforma em array
         List<String> combinations = new ArrayList<>(); // Armazena todas as combinações
 
         //int maxCombinations = (int) Math.pow(words.length, maxSizeString); // Precisa importar lib
@@ -33,7 +33,6 @@ public class EngineTwo {
                 combinations.add(combination);
             }
         }
-
         return combinations;
     }
 }
