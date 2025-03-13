@@ -65,7 +65,7 @@ public class InterfaceWordlist {
 
         JPanel subframeInputKeysWords = new JPanel(); // Frame para inserir as palavras chave da wordlist
         JLabel labelInputKeysWords = new JLabel("Digite as palavras chave (Devem ser separadas por espaco): ");
-        JTextField textFieldInputKeysWords = new JTextField(2); // Gambiarra!!! sujeito a buffer Overflow
+        JTextField textFieldInputKeysWords = new JTextField(50); // Gambiarra!!! sujeito a buffer Overflow
         subframeInputKeysWords.add(labelInputKeysWords);
         subframeInputKeysWords.add(textFieldInputKeysWords);
 
@@ -137,7 +137,7 @@ public class InterfaceWordlist {
         // specialCharacters
         buttonGenerateSystem.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformedSystem(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     wordlistArea.setText(""); // Limpa a area
 
@@ -192,23 +192,57 @@ public class InterfaceWordlist {
 
         buttonGeneratePersonalized.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformedPersonalized(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     wordlistArea.setText(""); // Limpa a area
 
-                    String labelInputKeysWordsArrayConvert = labelInputKeysWords.getText();
-                    //labelInputKeysWordsArrayConvert = labelInputKeysWordsArrayConvert.split(" "); // Remover caso de certo
-                    int maxSizeStringPersonalized = Integer.parseInt(labelInputSizeKeysWords.getText());
-                    if (maxSizeStringPersonalized <= 0) {
-                        JOptionPane.showMessageDialog(window, "O numero deve ser maior que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    String textFieldInputKeysWordsConvert = textFieldInputKeysWords.getText();
+                    if (textFieldInputKeysWordsConvert.length() <= 0) {
+                        JOptionPane.showMessageDialog(window, "O campo de texto nao pode ficar em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                                        
+                    int maxSizeStringPersonalized = Integer.parseInt(textFieldInputSizeKeysWords.getText());
+                    String verifyTextPersonalizedIsNull = textFieldInputSizeKeysWords.getText(); // Gambiarra!!! Deve ter outra forma de verificar se e null
+                    if (verifyTextPersonalizedIsNull.length() <= 0) {
+                        JOptionPane.showMessageDialog(window, "O campo de texto nao pode ficar em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
                         return;
+                    } else {
+                        if (maxSizeStringPersonalized <= 0) {
+                            JOptionPane.showMessageDialog(window, "O numero deve ser maior que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                     }
 
-                    EngineTwo functions = new EngineTwo();
-                    List<String> wordlist = functions.wordlistPersonalized(maxSizeStringPersonalized, labelInputKeysWordsArrayConvert);
-        
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(window, "Numero Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    SwingWorker<Void, String> worker = new SwingWorker<>() {
+                        @Override
+                        protected Void doInBackground() throws Exception {
+                            EngineTwo functions = new EngineTwo();
+                            List<String> wordlist = functions.wordlistPersonalized(maxSizeStringPersonalized, textFieldInputKeysWordsConvert);
+
+                            for (String word : wordlist) {
+                                publish(word);
+                                System.out.println(word);
+                                Thread.sleep(50);
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void process(List<String> chuncks) {
+                            for (String word : chuncks) {
+                                wordlistArea.append(word + "\n");
+                            }
+                        }
+
+                        @Override
+                        protected void done(){
+                            JOptionPane.showMessageDialog(window, "Concluido", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    };
+                    worker.execute();
+                 
+                //} catch (NumberFormatException ex) {
+                //    JOptionPane.showMessageDialog(window, "Numero Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(window, "Error ao gerar Wordlist: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 } 
