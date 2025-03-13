@@ -13,27 +13,35 @@ Cada palavra neste modo equivale a um tamanho na string.
 
 O modo Smarted ainda nao foi implementado, apesar de disponibilizado no GUI.
 
-V1
-- EngineOne 
-    Aguardar criacao de gravacao de arquivo
+*V1*
+- EngineOne
+
+    -Aguardar criacao de gravacao de arquivo
 
 - EngineTwo
-    Aguardar criacao de gravacao de arquivo
+
+    -Aguardar criacao de gravacao de arquivo
 
 - EngineThree
-    Desenvolver a logica de requisicao
-    Coletar sites para download ou consulta de wordlists
+
+    -Desenvolver a logica de requisicao
+    -Coletar sites para download ou consulta de wordlists
 
 - EngineCommons
-    Implementar gravacao de arquivo
+
+    -Implementar gravacao de arquivo
 
 - InterfaceWordlist
-    Corrigir o tamnho do campo de apresentacao da geracao de wordlist (Tamanho fixo - labelInputKeysWords)
-    Alterar tamanho do campo de input do Personalized (criar uma janela para input dos dados - wordlistArea)
-    Implementar a EngineThree
+
+    -Corrigir o tamanho do campo de apresentacao da geracao de wordlist (Tamanho fixo - labelInputKeysWords)
+    -Alterar tamanho do campo de input do Personalized (criar uma janela para input dos dados - wordlistArea)
+    -Implementar a EngineThree
+    -Implantar um botao de Stop enquanto a wordlist estiver sendo gerada
 
 
-V2
+*V2*
+
 O gerador cria somente wordlists para bruteforce de senhas. 
 Permitir tambem a criacao para bruteforce de dominios.
-Ainda nao desenhado.
+Ainda nao desenhadoo.
+
