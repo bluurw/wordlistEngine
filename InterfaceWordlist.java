@@ -64,13 +64,13 @@ public class InterfaceWordlist {
         framePersonalizedGenerator.setBorder(BorderFactory.createTitledBorder("Personalized Generator"));
 
         JPanel subframeInputKeysWords = new JPanel(); // Frame para inserir as palavras chave da wordlist
-        JLabel labelInputKeysWords = new JLabel("Digite as palavras chave (Devem ser separadas por espaco): ");
+        JLabel labelInputKeysWords = new JLabel("Digite as palavras chave (dividas por espaco): ");
         JTextField textFieldInputKeysWords = new JTextField(50); // Gambiarra!!! sujeito a buffer Overflow
         subframeInputKeysWords.add(labelInputKeysWords);
         subframeInputKeysWords.add(textFieldInputKeysWords);
 
         JPanel subframeInputSizeKeysWords = new JPanel(); // Frame para inserir as palavras chave da wordlist
-        JLabel labelInputSizeKeysWords = new JLabel("Digite o tamanho de cada String (key=1): ");
+        JLabel labelInputSizeKeysWords = new JLabel("Digite o tamanho maximo de cada String (key=1): ");
         JTextField textFieldInputSizeKeysWords = new JTextField(2); // Gambiarra!!! sujeito a buffer Overflow
         subframeInputSizeKeysWords.add(labelInputSizeKeysWords);
         subframeInputSizeKeysWords.add(textFieldInputSizeKeysWords);
@@ -221,7 +221,6 @@ public class InterfaceWordlist {
 
                             for (String word : wordlist) {
                                 publish(word);
-                                System.out.println(word);
                                 Thread.sleep(50);
                             }
                             return null;
@@ -240,9 +239,7 @@ public class InterfaceWordlist {
                         }
                     };
                     worker.execute();
-                 
-                //} catch (NumberFormatException ex) {
-                //    JOptionPane.showMessageDialog(window, "Numero Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
+
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(window, "Error ao gerar Wordlist: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 } 
